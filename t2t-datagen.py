@@ -32,8 +32,8 @@ import tempfile
 
 import numpy as np
 
-import generator
-import generator_utils
+from tensor2tensor.data_generators import cnchat
+from tensor2tensor.data_generators import cnchat_utils
 
 import tensorflow as tf
 
@@ -54,8 +54,8 @@ flags.DEFINE_integer("random_seed", 429459, "Random seed to use.")
 # pylint: disable=g-long-lambda
 _SUPPORTED_PROBLEM_GENERATORS = {
     "chat_tokens_130k": (
-        lambda: generator.ende_wordpiece_token_generator(FLAGS.tmp_dir, True, 2**17),
-        lambda: generator.ende_wordpiece_token_generator(FLAGS.tmp_dir, False, 2**17)
+        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, True, 2**17),
+        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, False, 2**17)
     ),
 }
 
@@ -90,20 +90,20 @@ def main(_):
   training_gen, dev_gen = _SUPPORTED_PROBLEM_GENERATORS[FLAGS.problem]
 
   tf.logging.info("Generating training data for %s.", FLAGS.problem)
-  train_output_files = generator_utils.generate_files(
+  train_output_files = cnchat_utils.generate_files(
       training_gen(), FLAGS.problem + UNSHUFFLED_SUFFIX + "-train",
       FLAGS.data_dir, FLAGS.num_shards, FLAGS.max_cases)
 
   tf.logging.info("Generating development data for %s.", FLAGS.problem)
-  dev_output_files = generator_utils.generate_files(
+  dev_output_files = cnchat_utils.generate_files(
       dev_gen(), FLAGS.problem + UNSHUFFLED_SUFFIX + "-dev", FLAGS.data_dir, 1)
 
   tf.logging.info("Shuffling data...")
   for fname in train_output_files + dev_output_files:
-    records = generator_utils.read_records(fname)
+    records = cnchat_utils.read_records(fname)
     random.shuffle(records)
     out_fname = fname.replace(UNSHUFFLED_SUFFIX, "")
-    generator_utils.write_records(records, out_fname)
+    cnchat_utils.write_records(records, out_fname)
     tf.gfile.Remove(fname)
 
 

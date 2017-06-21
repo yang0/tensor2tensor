@@ -104,7 +104,7 @@ def token_generator(source_path, target_path, token_vocab, eos=None):
         yield {"inputs": source_ints, "targets": target_ints}
         source, target = source_file.readline(), target_file.readline()
 
-def ende_wordpiece_token_generator(tmp_dir, train, vocab_size):
+def chat_wordpiece_token_generator(tmp_dir, train, vocab_size):
   symbolizer_vocab = generator_utils.get_or_generate_vocab(
       tmp_dir, "tokens.vocab.%d" % vocab_size, vocab_size)
   datasets = _TRAIN_DATASETS if train else _TEST_DATASETS
@@ -113,3 +113,6 @@ def ende_wordpiece_token_generator(tmp_dir, train, vocab_size):
   data_path = _compile_data(tmp_dir, datasets, "chinese_chat_tok_%s" % tag)
   return token_generator(data_path + ".lang1", data_path + ".lang2",
                          symbolizer_vocab, 1)
+
+
+
