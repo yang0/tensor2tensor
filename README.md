@@ -27,6 +27,9 @@ issues](https://github.com/tensorflow/tensor2tensor/issues).
 
 ## Walkthrough
 
+rawparser_util.py
+把原始的文件解析成对话形式的src、target两个文件。暂时不做分词，直接分字
+
 Here's a walkthrough training a good English-to-German translation
 model using the Transformer model from [*Attention Is All You
 Need*](https://arxiv.org/abs/1706.03762) on WMT data.
