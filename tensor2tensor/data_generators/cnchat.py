@@ -1,4 +1,4 @@
-import generator_utils
+from tensor2tensor.data_generators import cnchat_utils
 import os
 import tensorflow as tf
 
@@ -105,7 +105,7 @@ def token_generator(source_path, target_path, token_vocab, eos=None):
         source, target = source_file.readline(), target_file.readline()
 
 def chat_wordpiece_token_generator(tmp_dir, train, vocab_size):
-  symbolizer_vocab = generator_utils.get_or_generate_vocab(
+  symbolizer_vocab = cnchat_utils.get_or_generate_vocab(
       tmp_dir, "tokens.vocab.%d" % vocab_size, vocab_size)
   datasets = _TRAIN_DATASETS if train else _TEST_DATASETS
   tag = "train" if train else "dev"

@@ -53,9 +53,9 @@ flags.DEFINE_integer("random_seed", 429459, "Random seed to use.")
 # Mapping from problems that we can generate data for to their generators.
 # pylint: disable=g-long-lambda
 _SUPPORTED_PROBLEM_GENERATORS = {
-    "chat_tokens_130k": (
-        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, True, 2**17),
-        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, False, 2**17)
+    "chat_tokens_32k": (
+        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, True, 2**15),
+        lambda: cnchat.chat_wordpiece_token_generator(FLAGS.tmp_dir, False, 2**15)
     ),
 }
 

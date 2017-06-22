@@ -7,8 +7,8 @@ from raw_parser.test import Test
 
 #分词
 _rawFiles={
-    # "test":Test,
-    #  "multi100w": Multi100w,
+    "test":Test,
+     "multi100w": Multi100w,
     "diagnosis": Question
 }
 

@@ -658,7 +658,7 @@ def image_mscoco_tokens(model_hparams, vocab_count):
 # Dictionary of named hyperparameter settings for various problems.
 # This is only accessed through the problem_hparams function below.
 PROBLEM_HPARAMS_MAP = {
-    "chat_tokens_130k": lambda p: wmt_ende_tokens(p, 2**17),
+    "chat_tokens_32k": lambda p: wmt_ende_tokens(p, 2**15),
 
     "algorithmic_addition_binary40": lambda p: algorithmic(4, p),
     "algorithmic_addition_decimal40": lambda p: algorithmic(12, p),

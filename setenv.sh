@@ -1,4 +1,4 @@
-PROBLEM=chat_tokens_130k
+PROBLEM=chat_tokens_32k
 MODEL=transformer
 HPARAMS=transformer_base
 

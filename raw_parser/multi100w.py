@@ -8,8 +8,8 @@ from raw_parser.cutwords_helper import cutWords
 RAW_FILE="data/raw/multi100w/multi100w.data"
 
 #提问句最多40个字，回答最多50
-MAX_SRC_SIZE = 100
-MAX_TARGET_SIZE = 100
+MAX_SRC_SIZE = 40
+MAX_TARGET_SIZE = 50
 
 
 #这个库来自购买的多轮聊天数据

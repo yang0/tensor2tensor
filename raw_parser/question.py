@@ -11,8 +11,8 @@ RAW_FILE = "data/raw/diagnosis/question.json"
 
 
 #提问句最多40个字，回答最多50
-MAX_SRC_SIZE = 100
-MAX_TARGET_SIZE = 100
+MAX_SRC_SIZE = 40
+MAX_TARGET_SIZE = 50
 
 
 class Question:
