@@ -1,3 +1,5 @@
+#coding=utf-8
+
 # Copyright 2017 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,7 +60,8 @@ class Tokenizer(object):
   """
 
   def __init__(self):
-    self._separator_chars = string.punctuation + string.whitespace
+    # self._separator_chars = string.punctuation + string.whitespace
+    self._separator_chars = [" "]
     self._separator_char_mask = array.array(
         "l", [chr(i) in self._separator_chars for i in xrange(256)])
     self.token_counts = dict()
@@ -79,19 +82,24 @@ class Tokenizer(object):
     """
     if not raw_text:
       return []
-    ret = []
-    token_start = 0
-    for pos in xrange(1, len(raw_text)):
-      if (self._is_separator_char(raw_text[pos]) !=
-          self._is_separator_char(raw_text[pos - 1])):
-        token = raw_text[token_start:pos]
-        if token != " " or token_start == 0:
-          ret.append(token)
-          self._increment_token_count(token)
-        token_start = pos
-    final_token = raw_text[token_start:]
-    ret.append(final_token)
-    self._increment_token_count(final_token)
+    ret = raw_text.split(" ")
+    for final_token in ret:
+      self._increment_token_count(final_token)
+
+
+
+    # token_start = 0
+    # for pos in xrange(1, len(raw_text)):
+    #   if (self._is_separator_char(raw_text[pos]) !=
+    #       self._is_separator_char(raw_text[pos - 1])):
+    #     token = raw_text[token_start:pos]
+    #     if token != " " or token_start == 0:
+    #       ret.append(token)
+    #       self._increment_token_count(token)
+    #     token_start = pos
+    # final_token = raw_text[token_start:]
+    # ret.append(final_token)
+    # self._increment_token_count(final_token)
     return ret
 
   def decode(self, tokens):
@@ -102,13 +110,7 @@ class Tokenizer(object):
     Returns:
       a string.
     """
-    ret = ""
-    for i, token in enumerate(tokens):
-      if (i > 0 and self._is_word_char(tokens[i - 1][0]) and
-          self._is_word_char(token[0])):
-        ret += " "
-      ret += token
-    return ret
+    return " ".join(tokens)
 
   def _is_separator_char(self, c):
     return self._separator_char_mask[ord(c)]

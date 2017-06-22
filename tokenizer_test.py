@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # Copyright 2017 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# coding=utf-8
+
 """Tests for tensor2tensor.data_generators.tokenizer."""
 
 from __future__ import absolute_import
@@ -35,22 +37,15 @@ class TokenizerTest(tf.test.TestCase):
   def testEncode(self):
     t = tokenizer.Tokenizer()
     self.assertEqual(
-        t.encode("Dude - that's so cool."),
-        ["Dude", " - ", "that", "'", "s", "so", "cool", "."])
-    self.assertEqual(
-        t.encode("Łukasz est né en 1981."),
-        ["Łukasz", "est", "né", "en", "1981", "."])
-    self.assertEqual(
-        t.encode(" Spaces at the ends "),
-        [" ", "Spaces", "at", "the", "ends", " "])
-    self.assertEqual(t.encode("802.11b"), ["802", ".", "11b"])
-    self.assertEqual(t.encode("two. \nlines"), ["two", ". \n", "lines"])
+        t.encode("你 好 - ？"),
+        ["你", "好", "-", "？"])
+
 
   def testDecode(self):
     t = tokenizer.Tokenizer()
     self.assertEqual(
-        t.decode(["Dude", " - ", "that", "'", "s", "so", "cool", "."]),
-        "Dude - that's so cool.")
+        t.decode(["你", "好", "-", "？"]),
+        "你 好 - ？")
 
   def testInvertibilityOnRandomStrings(self):
     t = tokenizer.Tokenizer()

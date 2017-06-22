@@ -1,3 +1,5 @@
+#coding=utf-8
+
 from tensor2tensor.data_generators import cnchat_utils
 import os
 import tensorflow as tf

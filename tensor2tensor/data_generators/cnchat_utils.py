@@ -1,4 +1,4 @@
-
+#coding=utf-8
 
 import os
 from tensor2tensor.data_generators.text_encoder import SubwordTextEncoder
